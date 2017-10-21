@@ -11,4 +11,8 @@ public class UserServiceImpl implements UserService{
 		return null;
 	}
 
+	public void regist(User user) {
+		
+	}
+
 }
