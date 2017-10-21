@@ -127,4 +127,7 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+  <select id="findByUserName" resultType="com.mistytech.user.bean.User" parameterType="String">
+  	select 	<include refid="Base_Column_List" /> from user where username=#{userName} 
+  </select>
 </mapper>
