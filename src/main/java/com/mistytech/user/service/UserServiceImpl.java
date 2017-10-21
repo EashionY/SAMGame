@@ -15,4 +15,8 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
+	public void modifyPwd(Integer userId, String oldPwd, String newPwd) {
+		
+	}
+
 }

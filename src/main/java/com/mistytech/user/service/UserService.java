@@ -7,4 +7,6 @@ public interface UserService {
 	User login(String userName,String password);
 	
 	void regist(User user);
+	
+	void modifyPwd(Integer userId,String oldPwd,String newPwd);
 }
