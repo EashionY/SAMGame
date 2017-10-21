@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration 
+	PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" 
+	"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+  <context id="context1" defaultModelType="flat">
+  	<commentGenerator>
+         <property name="suppressDate" value="false"/>
+         <property name="suppressAllComments" value="true"/>
+    </commentGenerator>
+    <jdbcConnection connectionURL="jdbc:mysql://120.78.80.106/SAM_test?useUnicode=true&amp;characterEncoding=utf8" 
+    	driverClass="com.mysql.jdbc.Driver" 
+    	password="123456" userId="admin" />
+   	<!-- 生成的实体类存放位置 -->
+    <javaModelGenerator targetPackage="com.mistytech.user.bean" targetProject="src/main/java" />
+    <!-- 生成的mapper文件存放位置 -->
+    <sqlMapGenerator targetPackage="com.mistytech.user.mapper" targetProject="src/main/java" />
+    <!-- 生成Dao类存放位置 -->
+    <javaClientGenerator targetPackage="com.mistytech.user.dao" targetProject="src/main/java" type="XMLMAPPER" />
+    <table schema="SAM_test" tableName="user" domainObjectName="User" enableCountByExample="false" 
+    	enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+    	 selectByExampleQueryId="false">
+      <generatedKey column="user_id" sqlStatement="Mysql"/>
+    </table>
+  </context>
+</generatorConfiguration>
