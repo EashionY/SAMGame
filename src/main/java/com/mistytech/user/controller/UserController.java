@@ -1,10 +1,11 @@
 package com.mistytech.user.controller;
 
+
 import javax.annotation.Resource;
-import javax.xml.ws.RespectBinding;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mistytech.user.service.UserService;
 import com.mistytech.util.JsonResult;
@@ -17,9 +18,9 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping("/login")
-	@RespectBinding
-	public JsonResult login(String userName,String password) {
-		return new JsonResult(userService.login(userName, password));
+	@ResponseBody
+	public JsonResult login(String username,String password) {
+		return new JsonResult(userService.login(username, password));
 	}
 	
 }

@@ -15,7 +15,7 @@
    	<!-- 生成的实体类存放位置 -->
     <javaModelGenerator targetPackage="com.mistytech.user.bean" targetProject="src/main/java" />
     <!-- 生成的mapper文件存放位置 -->
-    <sqlMapGenerator targetPackage="com.mistytech.user.mapper" targetProject="src/main/java" />
+    <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resource" />
     <!-- 生成Dao类存放位置 -->
     <javaClientGenerator targetPackage="com.mistytech.user.dao" targetProject="src/main/java" type="XMLMAPPER" />
     <table schema="SAM_test" tableName="user" domainObjectName="User" enableCountByExample="false" 

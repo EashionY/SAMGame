@@ -4,9 +4,10 @@ import com.mistytech.user.bean.User;
 
 public interface UserService {
 
-	User login(String userName,String password);
+	public User login(String username,String password);
 	
-	void regist(User user);
+	public void regist(User user);
 	
-	void modifyPwd(Integer userId,String oldPwd,String newPwd);
+	public void modifyPwd(Integer userId,String oldPwd,String newPwd);
+	
 }

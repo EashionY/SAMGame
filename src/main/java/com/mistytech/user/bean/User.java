@@ -1,10 +1,16 @@
 package com.mistytech.user.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable{
 	
-    private Integer userId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1169066469142728853L;
+
+	private Integer userId;
 
     private String username;
 

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.mistytech.user.bean.User;
 import com.mistytech.user.dao.UserMapper;
-
 @Service("userService")
 public class UserServiceImpl implements UserService {
 

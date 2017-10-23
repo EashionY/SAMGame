@@ -1,5 +1,7 @@
 package com.mistytech.user.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.mistytech.user.bean.User;
 
 public interface UserMapper {
@@ -16,5 +18,5 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-	User findByUsername(String username);
+	User findByUsername(@Param("username")String username);
 }
