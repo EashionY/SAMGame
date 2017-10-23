@@ -3,6 +3,7 @@ package com.mistytech.user.bean;
 import java.util.Date;
 
 public class User {
+	
     private Integer userId;
 
     private String username;
@@ -18,6 +19,8 @@ public class User {
     private Date createTime;
 
     private Date updateTime;
+
+    private Byte online;
 
     public Integer getUserId() {
         return userId;
@@ -82,4 +85,45 @@ public class User {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    public Byte getOnline() {
+        return online;
+    }
+
+    public void setOnline(Byte online) {
+        this.online = online;
+    }
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", nickname=" + nickname
+				+ ", gold=" + gold + ", userExp=" + userExp + ", createTime=" + createTime + ", updateTime="
+				+ updateTime + ", online=" + online + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		return true;
+	}
+    
 }

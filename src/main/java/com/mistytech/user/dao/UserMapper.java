@@ -3,6 +3,7 @@ package com.mistytech.user.dao;
 import com.mistytech.user.bean.User;
 
 public interface UserMapper {
+	
     int deleteByPrimaryKey(Integer userId);
 
     int insert(User record);
@@ -14,6 +15,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
-    
-    User findByUserName(String userName);
+
+	User findByUsername(String username);
 }

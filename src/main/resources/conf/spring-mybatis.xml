@@ -28,11 +28,11 @@
 	<bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dbcp"></property>
 		<property name="configLocation" value="classpath:conf/mybatis-config.xml"></property>
-		<property name="mapperLocations" value="classpath:com.mistytech/*.xml"></property>
+		<property name="mapperLocations" value="classpath:com.mistytech.*.mapper/*.xml"></property>
 	</bean>
 	<!-- 配置mapper扫描 -->
 	<bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.rrenpin.dao"></property>
+		<property name="basePackage" value="com.mistytech"></property>
 	</bean>
 </beans>
 

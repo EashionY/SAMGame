@@ -9,9 +9,9 @@
          <property name="suppressDate" value="false"/>
          <property name="suppressAllComments" value="true"/>
     </commentGenerator>
-    <jdbcConnection connectionURL="jdbc:mysql://120.78.80.106/SAM_test?useUnicode=true&amp;characterEncoding=utf8" 
+    <jdbcConnection connectionURL="jdbc:mysql://120.78.80.106:3306/SAM_test?useUnicode=true&amp;characterEncoding=utf8" 
     	driverClass="com.mysql.jdbc.Driver" 
-    	password="123456" userId="admin" />
+    	userId="admin" password="123456"/>
    	<!-- 生成的实体类存放位置 -->
     <javaModelGenerator targetPackage="com.mistytech.user.bean" targetProject="src/main/java" />
     <!-- 生成的mapper文件存放位置 -->

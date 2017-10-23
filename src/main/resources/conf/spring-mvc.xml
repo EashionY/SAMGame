@@ -27,7 +27,7 @@
 	<mvc:annotation-driven />
 	
 	<!-- 组件扫描 -->
-	<context:component-scan base-package="com.rrenpin.*" />
+	<context:component-scan base-package="com.mistytech.*" />
 	
 	<!-- task任务扫描注解驱动 -->
 	<task:annotation-driven />
