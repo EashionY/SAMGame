@@ -2,7 +2,7 @@ package com.mistytech.user.service;
 
 import com.mistytech.user.bean.User;
 
-public interface UserService {
+public interface IUserService {
 
 	public User login(String username,String password);
 	

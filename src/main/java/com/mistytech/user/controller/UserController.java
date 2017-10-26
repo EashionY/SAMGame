@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mistytech.user.service.UserService;
+import com.mistytech.user.service.IUserService;
 import com.mistytech.util.JsonResult;
 
 @Controller
@@ -15,7 +15,7 @@ import com.mistytech.util.JsonResult;
 public class UserController {
 
 	@Resource
-	private UserService userService;
+	private IUserService userService;
 	
 	@RequestMapping("/login")
 	@ResponseBody
