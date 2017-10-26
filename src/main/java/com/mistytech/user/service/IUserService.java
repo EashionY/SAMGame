@@ -3,8 +3,7 @@ package com.mistytech.user.service;
 import com.mistytech.user.bean.User;
 
 public interface IUserService {
-
-	public User login(String username,String password);
+	public User findByUserName(String username);
 	
 	public void regist(User user);
 	

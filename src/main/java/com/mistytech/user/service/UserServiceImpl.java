@@ -11,18 +11,13 @@ public class UserServiceImpl implements IUserService {
 
 	@Resource
 	private UserMapper userMapper;
-
-	public User login(String username, String password) {
+	
+	public User findByUserName(String username){
+		System.out.println(username);
 		User user = userMapper.findByUsername(username);
-		if (user == null) {
-			System.out.println("用户不存在");
-		}
-		if (!password.equals(user.getPassword())) {
-			System.out.println("密码错误");
-		}
+		
 		return user;
 	}
-
 	public void regist(User user) {
 
 	}
