@@ -16,8 +16,6 @@ import com.mistytech.util.JsonWrapper;
 import com.mistytech.util.Md5Util;
 import com.mistytech.util.SessionUtils;
 
-import sun.security.provider.MD5;
-
 @Controller
 @RequestMapping("/user")
 public class UserController extends BaseController {
@@ -39,10 +37,54 @@ public class UserController extends BaseController {
 				return JsonWrapper.failureWrapper("用户名或密码错误");
 			}
 			SessionUtils.setUser(request, user);
-			return JsonWrapper.successWrapper(user);
+			return JsonWrapper.successWrapper("登录成功");
 		} catch (Exception e) {
-			this.log.error(e.getMessage());
+			this.log.error(e.getMessage(),e);
 			e.printStackTrace();
+			return JsonWrapper.failureWrapper("网络异常");
+		}
+	}
+	
+	@RequestMapping("/regist")
+	@ResponseBody
+	public HashMap<String, Object> regist(User user){
+		String username = user.getUsername();
+		User user1 = userService.findByUserName(username);
+		if(user1 != null) {
+			return JsonWrapper.failureWrapper("用户名已存在");
+		}else {
+			try {
+				String pwd = user.getPassword();
+				user.setPassword(Md5Util.MD5(pwd));
+				userService.saveUser(user);
+				return JsonWrapper.successWrapper("注册成功");
+			} catch (Exception e) {
+				e.printStackTrace();
+				this.log.error(e.getMessage(),e);
+				return JsonWrapper.failureWrapper("网络异常");
+			}
+		}
+	}
+	
+	@RequestMapping("/updatePwd")
+	@ResponseBody
+	public HashMap<String, Object> updatePwd(Integer userId,String oldPwd,String newPwd){
+		User user = userService.findByUserId(userId);
+		if(user == null) {
+			return JsonWrapper.failureWrapper("账号不存在");
+		}
+		oldPwd = Md5Util.MD5(oldPwd);
+		if(!oldPwd.equals(user.getPassword())) {
+			return JsonWrapper.failureWrapper("旧密码错误");
+		}
+		newPwd = Md5Util.MD5(newPwd);
+		user.setPassword(newPwd);
+		try {
+			userService.updateUser(user);
+			return  JsonWrapper.successWrapper("修改成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.log.error(e.getMessage(),e);
 			return JsonWrapper.failureWrapper("网络异常");
 		}
 	}

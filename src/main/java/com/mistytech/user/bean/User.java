@@ -26,7 +26,9 @@ public class User implements Serializable{
 
     private Date updateTime;
 
-    private Byte online;
+    private Integer online;
+    
+    private Integer userStatus;
 
     public Integer getUserId() {
         return userId;
@@ -92,19 +94,27 @@ public class User implements Serializable{
         this.updateTime = updateTime;
     }
 
-    public Byte getOnline() {
+    public Integer getOnline() {
         return online;
     }
 
-    public void setOnline(Byte online) {
+    public void setOnline(Integer online) {
         this.online = online;
     }
+
+	public Integer getUserStatus() {
+		return userStatus;
+	}
+
+	public void setUserStatus(Integer userStatus) {
+		this.userStatus = userStatus;
+	}
 
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", nickname=" + nickname
 				+ ", gold=" + gold + ", userExp=" + userExp + ", createTime=" + createTime + ", updateTime="
-				+ updateTime + ", online=" + online + "]";
+				+ updateTime + ", online=" + online + ", userStatus=" + userStatus + "]";
 	}
 
 	@Override

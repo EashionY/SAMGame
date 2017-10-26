@@ -12,18 +12,22 @@ public class UserServiceImpl implements IUserService {
 	@Resource
 	private UserMapper userMapper;
 	
-	public User findByUserName(String username){
-		System.out.println(username);
+	public User findByUserName(String username) {
 		User user = userMapper.findByUsername(username);
-		
 		return user;
 	}
-	public void regist(User user) {
-
+	
+	public void saveUser(User user) throws Exception{
+		userMapper.insertSelective(user);
 	}
 
-	public void modifyPwd(Integer userId, String oldPwd, String newPwd) {
+	public void updateUser(User user) throws Exception{
+		userMapper.updateByPrimaryKeySelective(user);
+	}
 
+	public User findByUserId(Integer userId) {
+		User user = userMapper.selectByPrimaryKey(userId);
+		return user;
 	}
 
 }
