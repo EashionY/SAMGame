@@ -4,11 +4,18 @@
 <meta charset="UTF-8">
 <title>主页</title>
 <link rel="stylesheet" type="text/css" href="/SAMGame/core/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/SAMGame/css/nva.css">
 <script type="text/javascript" src="/SAMGame/core/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="/SAMGame/core/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/SAMGame/core/layer/layer.js"></script>
-<style type="text/css">
-</style>
+<script type="text/javascript" src="/SAMGame/js/admin/nva.js"></script>
+<script type="text/javascript">
+$(function(){
+	var height=document.documentElement.clientHeight;
+	document.getElementById('mainFrame').style.height=height*0.9+"px";
+	toIndex();//前往主页
+})
+</script>
 </head>
 <body>
 	<div class="nva">
@@ -23,15 +30,17 @@
 			      </button>
 			      <a class="navbar-brand" href="#">剑与魔法后台管理系统</a>
 			    </div>
-				<ul class="nav navbar-nav navbar-right">
-					<li role="presentation" class="active"><a href="#">主页</a></li>
-		  			<li role="presentation"><a href="#">道具管理</a></li>
-		  			<li role="presentation"><a href="#">角色管理</a></li>
-		 	 		<li role="presentation"><a href="#">用户管理</a></li>
-		 			<li role="presentation"><a href="#">注销</a></li>
+				<ul class="nav navbar-nav navbar-right nav-ul">
+					<li role="presentation"><a href="javascrpt:void(0);" onclick="toIndex();">主页</a></li>
+		  			<li role="presentation"><a href="javascrpt:void(0);" onclick="toProp();">道具管理</a></li>
+		  			<li role="presentation"><a href="javascrpt:void(0);" onclick="toRole();">角色管理</a></li>
+		 	 		<li role="presentation"><a href="javascrpt:void(0);" onclick="toUser();">用户管理</a></li>
+		 			<li role="presentation"><a href="javascrpt:void(0);" onclick="toOther();">注销</a></li>
 				</ul>
 			</div>
 		</nav>
 	</div>
+	<iframe style="scrolling:auto; width: 100%;height: 100%;"
+		frameborder="0" id="mainFrame" name="mainFrame" src=""></iframe>
 </body>
 </html>
