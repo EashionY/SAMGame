@@ -15,14 +15,17 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	<!-- 导入数据库配置文件 -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="classpath:jdbc_dev.properties" />
+	</bean>
 	<!-- 配置数据库连接参数及连接池 -->
 	<bean id="dbcp" class="org.apache.commons.dbcp.BasicDataSource">
-		<!-- <property name="username" value="root"></property>
-		<property name="password" value="root"></property> -->
-		<property name="username" value="admin"></property>
-		<property name="password" value="123456"></property> 
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://120.78.80.106:3306/SAM_test?useUnicode=true&amp;characterEncoding=utf8"></property>
+		<property name="username" value="${username}"></property>
+		<property name="password" value="${password}"></property> 
+		<property name="driverClassName" value="${drivername}"></property>
+		<property name="url" value="${url}"></property>
 	</bean>
 	<!-- 配置SqlSessionFactory -->
 	<bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean">

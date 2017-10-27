@@ -23,6 +23,14 @@ public class UserController extends BaseController {
 	@Resource
 	private IUserService userService;
 	
+	/**
+	 * µÇÂ¼.
+	 *
+	 * @param request the request
+	 * @param username the username
+	 * @param password the password
+	 * @return the hash map
+	 */
 	@RequestMapping("/login")
 	@ResponseBody
 	public HashMap<String, Object> login(HttpServletRequest request, String username, String password) {
@@ -45,6 +53,12 @@ public class UserController extends BaseController {
 		}
 	}
 	
+	/**
+	 * ×¢²á.
+	 *
+	 * @param user the user
+	 * @return the hash map
+	 */
 	@RequestMapping("/regist")
 	@ResponseBody
 	public HashMap<String, Object> regist(User user){
@@ -66,6 +80,14 @@ public class UserController extends BaseController {
 		}
 	}
 	
+	/**
+	 * ÐÞ¸ÄÃÜÂë.
+	 *
+	 * @param userId the user id
+	 * @param oldPwd the old pwd
+	 * @param newPwd the new pwd
+	 * @return the hash map
+	 */
 	@RequestMapping("/updatePwd")
 	@ResponseBody
 	public HashMap<String, Object> updatePwd(Integer userId,String oldPwd,String newPwd){

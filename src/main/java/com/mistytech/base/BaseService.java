@@ -1,5 +1,5 @@
 package com.mistytech.base;
 
-public class baseService {
+public class BaseService {
 
 }

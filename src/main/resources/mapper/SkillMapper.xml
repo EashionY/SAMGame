@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mistytech.skill.dao.SkillMapper">
+  <resultMap id="BaseResultMap" type="com.mistytech.skill.bean.Skill">
+    <id column="skill_id" jdbcType="INTEGER" property="skillId" />
+    <result column="skill_name" jdbcType="VARCHAR" property="skillName" />
+    <result column="damage_indirect" jdbcType="INTEGER" property="damageIndirect" />
+    <result column="damage_direct" jdbcType="INTEGER" property="damageDirect" />
+    <result column="skill_type" jdbcType="TINYINT" property="skillType" />
+    <result column="skill_rare" jdbcType="TINYINT" property="skillRare" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="skill_status" jdbcType="TINYINT" property="skillStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    skill_id, skill_name, damage_indirect, damage_direct, skill_type, skill_rare, createtime, 
+    updatetime, skill_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from skill
+    where skill_id = #{skillId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from skill
+    where skill_id = #{skillId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mistytech.skill.bean.Skill">
+    <selectKey keyProperty="skillId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into skill (skill_id, skill_name, damage_indirect, 
+      damage_direct, skill_type, skill_rare, 
+      createtime, updatetime, skill_status
+      )
+    values (#{skillId,jdbcType=INTEGER}, #{skillName,jdbcType=VARCHAR}, #{damageIndirect,jdbcType=INTEGER}, 
+      #{damageDirect,jdbcType=INTEGER}, #{skillType,jdbcType=TINYINT}, #{skillRare,jdbcType=TINYINT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{skillStatus,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mistytech.skill.bean.Skill">
+    <selectKey keyProperty="skillId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into skill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      skill_id,
+      <if test="skillName != null">
+        skill_name,
+      </if>
+      <if test="damageIndirect != null">
+        damage_indirect,
+      </if>
+      <if test="damageDirect != null">
+        damage_direct,
+      </if>
+      <if test="skillType != null">
+        skill_type,
+      </if>
+      <if test="skillRare != null">
+        skill_rare,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="skillStatus != null">
+        skill_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{skillId,jdbcType=INTEGER},
+      <if test="skillName != null">
+        #{skillName,jdbcType=VARCHAR},
+      </if>
+      <if test="damageIndirect != null">
+        #{damageIndirect,jdbcType=INTEGER},
+      </if>
+      <if test="damageDirect != null">
+        #{damageDirect,jdbcType=INTEGER},
+      </if>
+      <if test="skillType != null">
+        #{skillType,jdbcType=TINYINT},
+      </if>
+      <if test="skillRare != null">
+        #{skillRare,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="skillStatus != null">
+        #{skillStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mistytech.skill.bean.Skill">
+    update skill
+    <set>
+      <if test="skillName != null">
+        skill_name = #{skillName,jdbcType=VARCHAR},
+      </if>
+      <if test="damageIndirect != null">
+        damage_indirect = #{damageIndirect,jdbcType=INTEGER},
+      </if>
+      <if test="damageDirect != null">
+        damage_direct = #{damageDirect,jdbcType=INTEGER},
+      </if>
+      <if test="skillType != null">
+        skill_type = #{skillType,jdbcType=TINYINT},
+      </if>
+      <if test="skillRare != null">
+        skill_rare = #{skillRare,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="skillStatus != null">
+        skill_status = #{skillStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where skill_id = #{skillId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mistytech.skill.bean.Skill">
+    update skill
+    set skill_name = #{skillName,jdbcType=VARCHAR},
+      damage_indirect = #{damageIndirect,jdbcType=INTEGER},
+      damage_direct = #{damageDirect,jdbcType=INTEGER},
+      skill_type = #{skillType,jdbcType=TINYINT},
+      skill_rare = #{skillRare,jdbcType=TINYINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      skill_status = #{skillStatus,jdbcType=TINYINT}
+    where skill_id = #{skillId,jdbcType=INTEGER}
+  </update>
+  
+  
+</mapper>

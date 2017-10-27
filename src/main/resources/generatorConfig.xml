@@ -13,15 +13,15 @@
     	driverClass="com.mysql.jdbc.Driver" 
     	userId="admin" password="123456"/>
    	<!-- 生成的实体类存放位置 -->
-    <javaModelGenerator targetPackage="com.mistytech.user.bean" targetProject="src/main/java" />
+    <javaModelGenerator targetPackage="com.mistytech.skill.bean" targetProject="src/main/java" />
     <!-- 生成的mapper文件存放位置 -->
-    <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resource" />
+    <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources" />
     <!-- 生成Dao类存放位置 -->
-    <javaClientGenerator targetPackage="com.mistytech.user.dao" targetProject="src/main/java" type="XMLMAPPER" />
-    <table schema="SAM_test" tableName="user" domainObjectName="User" enableCountByExample="false" 
+    <javaClientGenerator targetPackage="com.mistytech.skill.dao" targetProject="src/main/java" type="XMLMAPPER" />
+    <table schema="SAM_test" tableName="skill" domainObjectName="Skill" enableCountByExample="false" 
     	enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
     	 selectByExampleQueryId="false">
-      <generatedKey column="user_id" sqlStatement="Mysql"/>
+      <generatedKey column="skill_id" sqlStatement="Mysql"/>
     </table>
   </context>
 </generatorConfiguration>
