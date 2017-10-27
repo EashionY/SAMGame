@@ -1,0 +1,48 @@
+.row{
+	margin: 0;	
+}
+.left {
+	width: 220px;
+	min-height: 548px;
+	height: 100%;
+	position: fixed;
+	bottom: 0;
+	z-index: 199;
+	padding: 0;
+	background-color: rgba(40, 46, 61, .98);
+	box-shadow: 1px 2px 5px #0F1013;
+}
+.left-ul {
+	position: absolute;
+	list-style: none;
+	left: -30px;
+}
+.ul-title {
+	color: #edf0f5;
+	height: 36px;
+	margin-top: 30px;
+}
+
+.ul-meu {
+	color: #edf0f5;
+	height: 36px;
+}
+
+.ul-meu span:first-child {
+	margin-left: 30px;
+	line-height: 36px;
+}
+
+.ul-meu:hover {
+	background-color: rgb(105, 144, 173);
+}
+
+.ul-title span {
+	font-size: 14px;
+}
+
+.ul-line {
+	width: 200px;
+	border-top: 1px solid #11141B;
+	border-bottom: 1px solid #393F4D;
+}
