@@ -7,7 +7,10 @@
 <link rel="stylesheet" type="text/css" href="/SAMGame/css/prop.css">
 <script type="text/javascript" src="/SAMGame/core/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="/SAMGame/core/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/SAMGame/core/bootstrap/js/bootstrap-paginator.js"></script>
 <script type="text/javascript" src="/SAMGame/core/layer/layer.js"></script>
+<script type="text/javascript" src="/SAMGame/core/base.js"></script>
+<script type="text/javascript" src="/SAMGame/js/admin/prop.js"></script>
 </head>
 <body>
 	<div class="content row">
@@ -16,24 +19,74 @@
 				<li class="ul-title"><span>道具管理></span></li>
 				<li class="ul-line"></li>
 				<li class="ul-meu" style="background-color:rgb(105, 144, 173);">
-					<span class="glyphicon glyphicon-cog"></span>
+					<img class="z-img" src="img/equipment.svg">
 					<span>装备管理</span>
 				</li>
 				<li class="ul-line"></li>
 				<li class="ul-meu">
-					<span class="glyphicon glyphicon-object-align-bottom"></span>
+					<img class="z-img" src="img/skill.svg">
 					<span>技能管理</span>
 				</li>
 				<li class="ul-line"></li>
 				<li class="ul-meu" id="accountManage">
-					<span class="glyphicon glyphicon-th-list"></span>
-					<span>其他管理</span>
+					<img class="z-img" src="img/arms.svg">
+					<span>武器管理</span>
 				</li>
 				<li class="ul-line"></li>
 			</ul>
 		</div>
-		<div class="col-md-9">ds</div>
+		<div class="col-md-11">
+			<div class="center">
+				<div class="center-top">
+					<div class="center-title equip-list">装备列表</div>
+					<div class="center-title equip-info">新增装备</div>
+				</div>
+				<div class="center-table">
+					<table class="table table-striped table-bordered table-hover">
+						<thead>
+							<tr>
+								<td width="100px">序号</td>
+								<td width="150px">装备图标</td>
+								<td width="200px">装备名称</td>
+								<td width="400px">装备属性</td>
+								<td width="100px">装备类型</td>
+								<td width="100px">稀有度</td>
+								<td width="100px">装备状态</td>
+								<td>操作</td>
+							</tr>
+						</thead>
+						<tbody class="eq-tbody">
+							
+						</tbody>
+					</table>
+				</div>
+				<div class="pageQuery" id="pageQuery" style="margin-left: auto;">
+					<div style="text-align: center">
+						<ul id="pageLimit"></ul> 
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="col-md-1">ds</div>
+	</div>
+	<div class="eqImg-info">
+		<div class="row eq-Big">
+			<div class="col-md-6">
+				<img class="eqBImg" src="">
+			</div>
+			<div class="eqBInfo">
+				<label class="eq-name"></label>
+				<ul class="col-md-6 eq-ul explain">
+					<li class="ex-lab"></li>
+					<li class="baseDef"></li>
+					<li class="baseRes"></li>
+				</ul>
+			</div>
+		</div>
+		<div class="eqImg-line"></div>
+		<div class="eq-Explain explain">
+			说明:唯一被动—献祭：每秒对周围敌方造成25+（1x英雄等级数）魔法伤害。对小兵和野怪造成50%额外伤害。
+		</div>
 	</div>
 </body>
 </html>

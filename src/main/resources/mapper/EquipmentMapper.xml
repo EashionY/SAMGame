@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mistytech.equipment.dao.EquipmentMapper">
+  <resultMap id="BaseResultMap" type="com.mistytech.equipment.bean.Equipment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="eq_name" jdbcType="VARCHAR" property="eqName" />
+    <result column="defense" jdbcType="VARCHAR" property="defense" />
+    <result column="resistance" jdbcType="VARCHAR" property="resistance" />
+    <result column="resistance_type" jdbcType="INTEGER" property="resistanceType" />
+    <result column="eq_rare" jdbcType="INTEGER" property="eqRare" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="eq_status" jdbcType="INTEGER" property="eqStatus" />
+    <result column="imgurl" jdbcType="VARCHAR" property="imgurl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, eq_name, defense, resistance, resistance_type, eq_rare, createtime, updatetime, 
+    eq_status, imgurl
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from equipment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from equipment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mistytech.equipment.bean.Equipment">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into equipment (id, eq_name, defense, 
+      resistance, resistance_type, eq_rare, 
+      createtime, updatetime, eq_status, 
+      imgurl)
+    values (#{id,jdbcType=INTEGER}, #{eqName,jdbcType=VARCHAR}, #{defense,jdbcType=VARCHAR}, 
+      #{resistance,jdbcType=VARCHAR}, #{resistanceType,jdbcType=INTEGER}, #{eqRare,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{eqStatus,jdbcType=INTEGER}, 
+      #{imgurl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mistytech.equipment.bean.Equipment">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into equipment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id,
+      <if test="eqName != null">
+        eq_name,
+      </if>
+      <if test="defense != null">
+        defense,
+      </if>
+      <if test="resistance != null">
+        resistance,
+      </if>
+      <if test="resistanceType != null">
+        resistance_type,
+      </if>
+      <if test="eqRare != null">
+        eq_rare,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="eqStatus != null">
+        eq_status,
+      </if>
+      <if test="imgurl != null">
+        imgurl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=INTEGER},
+      <if test="eqName != null">
+        #{eqName,jdbcType=VARCHAR},
+      </if>
+      <if test="defense != null">
+        #{defense,jdbcType=VARCHAR},
+      </if>
+      <if test="resistance != null">
+        #{resistance,jdbcType=VARCHAR},
+      </if>
+      <if test="resistanceType != null">
+        #{resistanceType,jdbcType=INTEGER},
+      </if>
+      <if test="eqRare != null">
+        #{eqRare,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eqStatus != null">
+        #{eqStatus,jdbcType=INTEGER},
+      </if>
+      <if test="imgurl != null">
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mistytech.equipment.bean.Equipment">
+    update equipment
+    <set>
+      <if test="eqName != null">
+        eq_name = #{eqName,jdbcType=VARCHAR},
+      </if>
+      <if test="defense != null">
+        defense = #{defense,jdbcType=VARCHAR},
+      </if>
+      <if test="resistance != null">
+        resistance = #{resistance,jdbcType=VARCHAR},
+      </if>
+      <if test="resistanceType != null">
+        resistance_type = #{resistanceType,jdbcType=INTEGER},
+      </if>
+      <if test="eqRare != null">
+        eq_rare = #{eqRare,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="eqStatus != null">
+        eq_status = #{eqStatus,jdbcType=INTEGER},
+      </if>
+      <if test="imgurl != null">
+        imgurl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mistytech.equipment.bean.Equipment">
+    update equipment
+    set eq_name = #{eqName,jdbcType=VARCHAR},
+      defense = #{defense,jdbcType=VARCHAR},
+      resistance = #{resistance,jdbcType=VARCHAR},
+      resistance_type = #{resistanceType,jdbcType=INTEGER},
+      eq_rare = #{eqRare,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      eq_status = #{eqStatus,jdbcType=INTEGER},
+      imgurl = #{imgurl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findAll" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from equipment
+  </select>
+  <select id="pageQuery" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from equipment limit #{offset},#{pageSize}
+  </select>
+</mapper>

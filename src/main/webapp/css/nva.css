@@ -1,3 +1,6 @@
 .active > a{
 	color: rgb(51, 133, 255) !important;
 }
+.navbar{
+	margin-bottom: 0;
+}
