@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.mistytech.skill.bean.Skill">
     <id column="skill_id" jdbcType="INTEGER" property="skillId" />
     <result column="skill_name" jdbcType="VARCHAR" property="skillName" />
+    <result column="skill_img" jdbcType="VARCHAR" property="skillImg" />
     <result column="damage_indirect" jdbcType="INTEGER" property="damageIndirect" />
     <result column="damage_direct" jdbcType="INTEGER" property="damageDirect" />
     <result column="skill_type" jdbcType="TINYINT" property="skillType" />
@@ -11,10 +12,11 @@
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
     <result column="skill_status" jdbcType="TINYINT" property="skillStatus" />
+    <result column="skill_intro" jdbcType="VARCHAR" property="skillIntro" />
   </resultMap>
   <sql id="Base_Column_List">
-    skill_id, skill_name, damage_indirect, damage_direct, skill_type, skill_rare, createtime, 
-    updatetime, skill_status
+    skill_id, skill_name, skill_img, damage_indirect, damage_direct, skill_type, skill_rare, 
+    createtime, updatetime, skill_status, skill_intro
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -27,20 +29,20 @@
     where skill_id = #{skillId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.mistytech.skill.bean.Skill">
-    <selectKey keyProperty="skillId" order="AFTER" resultType="java.lang.Integer">
+    <selectKey keyProperty="skillId" order="BEFORE" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into skill (skill_id, skill_name, damage_indirect, 
-      damage_direct, skill_type, skill_rare, 
-      createtime, updatetime, skill_status
-      )
-    values (#{skillId,jdbcType=INTEGER}, #{skillName,jdbcType=VARCHAR}, #{damageIndirect,jdbcType=INTEGER}, 
-      #{damageDirect,jdbcType=INTEGER}, #{skillType,jdbcType=TINYINT}, #{skillRare,jdbcType=TINYINT}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{skillStatus,jdbcType=TINYINT}
-      )
+    insert into skill (skill_id, skill_name, skill_img, 
+      damage_indirect, damage_direct, skill_type, 
+      skill_rare, createtime, updatetime, 
+      skill_status, skill_intro)
+    values (#{skillId,jdbcType=INTEGER}, #{skillName,jdbcType=VARCHAR}, #{skillImg,jdbcType=VARCHAR}, 
+      #{damageIndirect,jdbcType=INTEGER}, #{damageDirect,jdbcType=INTEGER}, #{skillType,jdbcType=TINYINT}, 
+      #{skillRare,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{skillStatus,jdbcType=TINYINT}, #{skillIntro,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mistytech.skill.bean.Skill">
-    <selectKey keyProperty="skillId" order="AFTER" resultType="java.lang.Integer">
+    <selectKey keyProperty="skillId" order="BEFORE" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into skill
@@ -48,6 +50,9 @@
       skill_id,
       <if test="skillName != null">
         skill_name,
+      </if>
+      <if test="skillImg != null">
+        skill_img,
       </if>
       <if test="damageIndirect != null">
         damage_indirect,
@@ -70,11 +75,17 @@
       <if test="skillStatus != null">
         skill_status,
       </if>
+      <if test="skillIntro != null">
+        skill_intro,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       #{skillId,jdbcType=INTEGER},
       <if test="skillName != null">
         #{skillName,jdbcType=VARCHAR},
+      </if>
+      <if test="skillImg != null">
+        #{skillImg,jdbcType=VARCHAR},
       </if>
       <if test="damageIndirect != null">
         #{damageIndirect,jdbcType=INTEGER},
@@ -97,6 +108,9 @@
       <if test="skillStatus != null">
         #{skillStatus,jdbcType=TINYINT},
       </if>
+      <if test="skillIntro != null">
+        #{skillIntro,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.mistytech.skill.bean.Skill">
@@ -104,6 +118,9 @@
     <set>
       <if test="skillName != null">
         skill_name = #{skillName,jdbcType=VARCHAR},
+      </if>
+      <if test="skillImg != null">
+        skill_img = #{skillImg,jdbcType=VARCHAR},
       </if>
       <if test="damageIndirect != null">
         damage_indirect = #{damageIndirect,jdbcType=INTEGER},
@@ -126,19 +143,24 @@
       <if test="skillStatus != null">
         skill_status = #{skillStatus,jdbcType=TINYINT},
       </if>
+      <if test="skillIntro != null">
+        skill_intro = #{skillIntro,jdbcType=VARCHAR},
+      </if>
     </set>
     where skill_id = #{skillId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mistytech.skill.bean.Skill">
     update skill
     set skill_name = #{skillName,jdbcType=VARCHAR},
+      skill_img = #{skillImg,jdbcType=VARCHAR},
       damage_indirect = #{damageIndirect,jdbcType=INTEGER},
       damage_direct = #{damageDirect,jdbcType=INTEGER},
       skill_type = #{skillType,jdbcType=TINYINT},
       skill_rare = #{skillRare,jdbcType=TINYINT},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      skill_status = #{skillStatus,jdbcType=TINYINT}
+      skill_status = #{skillStatus,jdbcType=TINYINT},
+      skill_intro = #{skillIntro,jdbcType=VARCHAR}
     where skill_id = #{skillId,jdbcType=INTEGER}
   </update>
   

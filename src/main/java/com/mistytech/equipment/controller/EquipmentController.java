@@ -26,7 +26,7 @@ public class EquipmentController {
 	@RequestMapping("/findAll")
 	@ResponseBody
 	public HashMap<String, Object> findAll(){
-		List<Equipment> eqs = this.service.findAll();
+		List<Equipment> eqs = service.findAll();
 		return JsonWrapper.successWrapper(eqs);
 	}
 	/**
@@ -38,7 +38,7 @@ public class EquipmentController {
 	@RequestMapping("/pageQuery")
 	@ResponseBody
 	public HashMap<String, Object> pageQuery(Integer page,Integer count){
-		List<Equipment> eqs = this.service.pageQuery(page, count);
+		List<Equipment> eqs = service.pageQuery(page, count);
 		return  JsonWrapper.successWrapper(eqs);
 	}
 }

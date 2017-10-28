@@ -3,7 +3,6 @@ package com.mistytech.skill.dao;
 import com.mistytech.skill.bean.Skill;
 
 public interface SkillMapper {
-	
     int deleteByPrimaryKey(Integer skillId);
 
     int insert(Skill record);

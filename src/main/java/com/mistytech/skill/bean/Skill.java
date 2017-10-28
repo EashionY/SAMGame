@@ -3,24 +3,27 @@ package com.mistytech.skill.bean;
 import java.util.Date;
 
 public class Skill {
-	//技能id
     private Integer skillId;
-    //技能名称
+
     private String skillName;
-    //间接伤害
-    private Integer damageIndirect;
-    //直接伤害
-    private Integer damageDirect;
-    //技能类型
-    private Integer skillType;
-    //技能稀有度
-    private Integer skillRare;
-    //创建时间
+
+    private String skillImg;//技能图标
+
+    private Integer damageIndirect;//间接伤害
+
+    private Integer damageDirect;//直接伤害
+
+    private Integer skillType;//技能类型（1-物理伤害，2-流血伤害，3-冰，4-火，5-电，6-奥术）
+
+    private Integer skillRare;//稀有度
+
     private Date createtime;
-    //最后修改时间
+
     private Date updatetime;
-    //技能状态(0--禁用，1--可用)
+
     private Integer skillStatus;
+
+    private String skillIntro;//技能介绍
 
     public Integer getSkillId() {
         return skillId;
@@ -36,6 +39,14 @@ public class Skill {
 
     public void setSkillName(String skillName) {
         this.skillName = skillName;
+    }
+
+    public String getSkillImg() {
+        return skillImg;
+    }
+
+    public void setSkillImg(String skillImg) {
+        this.skillImg = skillImg;
     }
 
     public Integer getDamageIndirect() {
@@ -94,11 +105,20 @@ public class Skill {
         this.skillStatus = skillStatus;
     }
 
+    public String getSkillIntro() {
+        return skillIntro;
+    }
+
+    public void setSkillIntro(String skillIntro) {
+        this.skillIntro = skillIntro;
+    }
+
 	@Override
 	public String toString() {
-		return "Skill [skillId=" + skillId + ", skillName=" + skillName + ", damageIndirect=" + damageIndirect
-				+ ", damageDirect=" + damageDirect + ", skillType=" + skillType + ", skillRare=" + skillRare
-				+ ", createtime=" + createtime + ", updatetime=" + updatetime + ", skillStatus=" + skillStatus + "]";
+		return "Skill [skillId=" + skillId + ", skillName=" + skillName + ", skillImg=" + skillImg + ", damageIndirect="
+				+ damageIndirect + ", damageDirect=" + damageDirect + ", skillType=" + skillType + ", skillRare="
+				+ skillRare + ", createtime=" + createtime + ", updatetime=" + updatetime + ", skillStatus="
+				+ skillStatus + ", skillIntro=" + skillIntro + "]";
 	}
 
 	@Override

@@ -5,12 +5,14 @@
 <title>道具管理</title>
 <link rel="stylesheet" type="text/css" href="/SAMGame/core/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/SAMGame/css/prop.css">
+<link rel="stylesheet" type="text/css" href="/SAMGame/css/skill.css">
 <script type="text/javascript" src="/SAMGame/core/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="/SAMGame/core/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/SAMGame/core/bootstrap/js/bootstrap-paginator.js"></script>
 <script type="text/javascript" src="/SAMGame/core/layer/layer.js"></script>
 <script type="text/javascript" src="/SAMGame/core/base.js"></script>
 <script type="text/javascript" src="/SAMGame/js/admin/prop.js"></script>
+<script type="text/javascript" src="/SAMGame/js/admin/skill.js"></script>
 </head>
 <body>
 	<div class="content row">
@@ -18,12 +20,12 @@
 			<ul class="left-ul">
 				<li class="ul-title"><span>道具管理></span></li>
 				<li class="ul-line"></li>
-				<li class="ul-meu" style="background-color:rgb(105, 144, 173);">
+				<li class="ul-meu ul-bg">
 					<img class="z-img" src="img/equipment.svg">
 					<span>装备管理</span>
 				</li>
 				<li class="ul-line"></li>
-				<li class="ul-meu">
+				<li class="ul-meu" onclick="skillManage()">
 					<img class="z-img" src="img/skill.svg">
 					<span>技能管理</span>
 				</li>
@@ -35,7 +37,7 @@
 				<li class="ul-line"></li>
 			</ul>
 		</div>
-		<div class="col-md-11">
+		<div class="col-md-11 equipment">
 			<div class="center">
 				<div class="center-top">
 					<div class="center-title equip-list">装备列表</div>
@@ -86,6 +88,42 @@
 		<div class="eqImg-line"></div>
 		<div class="eq-Explain explain">
 			说明:唯一被动—献祭：每秒对周围敌方造成25+（1x英雄等级数）魔法伤害。对小兵和野怪造成50%额外伤害。
+		</div>
+	</div>
+	<div class="col-md-11 skill">
+	    <div class="center">
+			<div class="center-top">
+				<div class="center-title skill-line">技能列表</div>
+				<div class="center-title" onclick="saveSkill()">新增技能</div>
+			</div>
+			<div class="center-table">
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<td width="100px">序号</td>
+							<td width="150px">技能图标</td>
+							<td width="150px">技能名称</td>
+							<td width="300px">技能属性</td>
+							<td width="200px">技能描述</td>
+							<td width="100px">技能类型</td>
+							<td width="100px">稀有度</td>
+							<td width="100px">技能状态</td>
+							<td>操作</td>
+						</tr>
+					</thead>
+					<tbody class="skill-tbody">
+						
+					</tbody>
+				</table>
+			</div>
+			<div class="pageQuery" id="pageQuery" style="margin-left: auto;">
+				<div style="text-align: center">
+					<ul id="pageLimit"></ul> 
+				</div>
+			</div>
+			<div class="center-table save-skill">
+			
+			</div>
 		</div>
 	</div>
 </body>
