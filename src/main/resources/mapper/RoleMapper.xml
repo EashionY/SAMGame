@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mistytech.role.dao.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.mistytech.role.bean.Role">
+    <id column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="blood_vol" jdbcType="INTEGER" property="bloodVol" />
+    <result column="phy_defense" jdbcType="VARCHAR" property="phyDefense" />
+    <result column="ice_resistance" jdbcType="VARCHAR" property="iceResistance" />
+    <result column="fire_resistance" jdbcType="VARCHAR" property="fireResistance" />
+    <result column="thunder_resistance" jdbcType="VARCHAR" property="thunderResistance" />
+    <result column="arcane_resistance" jdbcType="VARCHAR" property="arcaneResistance" />
+    <result column="role_type" jdbcType="INTEGER" property="roleType" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="role_status" jdbcType="INTEGER" property="roleStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_id, blood_vol, phy_defense, ice_resistance, fire_resistance, thunder_resistance, 
+    arcane_resistance, role_type, createtime, role_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from role
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mistytech.role.bean.Role">
+    <selectKey keyProperty="roleId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into role (role_id, blood_vol, phy_defense, 
+      ice_resistance, fire_resistance, thunder_resistance, 
+      arcane_resistance, role_type, createtime, 
+      role_status)
+    values (#{roleId,jdbcType=INTEGER}, #{bloodVol,jdbcType=INTEGER}, #{phyDefense,jdbcType=VARCHAR}, 
+      #{iceResistance,jdbcType=VARCHAR}, #{fireResistance,jdbcType=VARCHAR}, #{thunderResistance,jdbcType=VARCHAR}, 
+      #{arcaneResistance,jdbcType=VARCHAR}, #{roleType,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{roleStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mistytech.role.bean.Role">
+    <selectKey keyProperty="roleId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      role_id,
+      <if test="bloodVol != null">
+        blood_vol,
+      </if>
+      <if test="phyDefense != null">
+        phy_defense,
+      </if>
+      <if test="iceResistance != null">
+        ice_resistance,
+      </if>
+      <if test="fireResistance != null">
+        fire_resistance,
+      </if>
+      <if test="thunderResistance != null">
+        thunder_resistance,
+      </if>
+      <if test="arcaneResistance != null">
+        arcane_resistance,
+      </if>
+      <if test="roleType != null">
+        role_type,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="roleStatus != null">
+        role_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{roleId,jdbcType=INTEGER},
+      <if test="bloodVol != null">
+        #{bloodVol,jdbcType=INTEGER},
+      </if>
+      <if test="phyDefense != null">
+        #{phyDefense,jdbcType=VARCHAR},
+      </if>
+      <if test="iceResistance != null">
+        #{iceResistance,jdbcType=VARCHAR},
+      </if>
+      <if test="fireResistance != null">
+        #{fireResistance,jdbcType=VARCHAR},
+      </if>
+      <if test="thunderResistance != null">
+        #{thunderResistance,jdbcType=VARCHAR},
+      </if>
+      <if test="arcaneResistance != null">
+        #{arcaneResistance,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null">
+        #{roleType,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleStatus != null">
+        #{roleStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mistytech.role.bean.Role">
+    update role
+    <set>
+      <if test="bloodVol != null">
+        blood_vol = #{bloodVol,jdbcType=INTEGER},
+      </if>
+      <if test="phyDefense != null">
+        phy_defense = #{phyDefense,jdbcType=VARCHAR},
+      </if>
+      <if test="iceResistance != null">
+        ice_resistance = #{iceResistance,jdbcType=VARCHAR},
+      </if>
+      <if test="fireResistance != null">
+        fire_resistance = #{fireResistance,jdbcType=VARCHAR},
+      </if>
+      <if test="thunderResistance != null">
+        thunder_resistance = #{thunderResistance,jdbcType=VARCHAR},
+      </if>
+      <if test="arcaneResistance != null">
+        arcane_resistance = #{arcaneResistance,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null">
+        role_type = #{roleType,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleStatus != null">
+        role_status = #{roleStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mistytech.role.bean.Role">
+    update role
+    set blood_vol = #{bloodVol,jdbcType=INTEGER},
+      phy_defense = #{phyDefense,jdbcType=VARCHAR},
+      ice_resistance = #{iceResistance,jdbcType=VARCHAR},
+      fire_resistance = #{fireResistance,jdbcType=VARCHAR},
+      thunder_resistance = #{thunderResistance,jdbcType=VARCHAR},
+      arcane_resistance = #{arcaneResistance,jdbcType=VARCHAR},
+      role_type = #{roleType,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      role_status = #{roleStatus,jdbcType=INTEGER}
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </update>
+</mapper>
