@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -62,5 +63,55 @@ public class SkillController extends BaseController {
 		}
 	}
 	
+	/**
+	 * 查找全部技能
+	 * 
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
+	@RequestMapping("/findAll")
+	@ResponseBody
+	public HashMap<String,Object> findAll(Integer page,Integer pageSize){
+		List<Map<String,Object>> result = skillService.findAll(page, pageSize);
+		return JsonWrapper.successWrapper(result);
+	}
 	
+	/**
+	 * 修改技能
+	 * 
+	 * @param skill
+	 * @return
+	 */
+	@RequestMapping("/updateSkill")
+	@ResponseBody
+	public HashMap<String,Object> updateSkill(Skill skill){
+		try {
+			skillService.updateSkill(skill);
+			return JsonWrapper.successWrapper("技能修改成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error(e.getMessage(),e);
+			return JsonWrapper.failureWrapper("网络异常");
+		}
+	}
+	
+	/**
+	 * 删除技能
+	 * 
+	 * @param skillId
+	 * @return
+	 */
+	@RequestMapping("/deleteSkill")
+	@ResponseBody
+	public HashMap<String,Object> deleteSkill(Integer skillId){
+		try {
+			skillService.deleteSkill(skillId);
+			return JsonWrapper.successWrapper("技能删除成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error(e.getMessage(),e);
+			return JsonWrapper.failureWrapper("网络异常");
+		}
+	}
 }

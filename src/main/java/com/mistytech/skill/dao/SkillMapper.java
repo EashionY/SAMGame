@@ -1,5 +1,10 @@
 package com.mistytech.skill.dao;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.mistytech.skill.bean.Skill;
 
 public interface SkillMapper {
@@ -14,4 +19,7 @@ public interface SkillMapper {
     int updateByPrimaryKeySelective(Skill record);
 
     int updateByPrimaryKey(Skill record);
+    
+    List<Map<String,Object>> findAll(@Param("offset")Integer offset,@Param("pageSize")Integer pageSize);
+    
 }

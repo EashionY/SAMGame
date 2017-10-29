@@ -163,6 +163,13 @@
       skill_intro = #{skillIntro,jdbcType=VARCHAR}
     where skill_id = #{skillId,jdbcType=INTEGER}
   </update>
-  
+  <select id="findAll" parameterType="java.lang.Integer" resultType="java.util.Map">
+    select (select count(*) from skill) as num,
+    <include refid="Base_Column_List"/>
+    from skill
+    <if test="offset != null">
+    limit #{offset},#{pageSize}
+    </if>
+  </select>
   
 </mapper>
