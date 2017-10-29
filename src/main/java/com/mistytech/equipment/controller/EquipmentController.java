@@ -1,12 +1,13 @@
 package com.mistytech.equipment.controller;
 
-import java.io.IOException;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,8 @@ import com.mistytech.base.BaseController;
 import com.mistytech.equipment.bean.Equipment;
 import com.mistytech.equipment.service.EquipmentService;
 import com.mistytech.util.JsonWrapper;
-import com.mistytech.util.Upload;
+
+import sun.misc.BASE64Decoder;
 
 @Controller
 @RequestMapping("/equipment")
@@ -54,25 +56,25 @@ public class EquipmentController extends BaseController{
 	 */
 	@RequestMapping("/saveEquipment")
 	@ResponseBody
-	public HashMap<String,Object> saveEquipment(HttpServletRequest request) throws UnsupportedEncodingException{
-		request.setCharacterEncoding("UTF-8");
-		List<String> path;
+	public HashMap<String,Object> saveEquipment(Equipment equipment){
 		try {
-			path = Upload.uploadImg(request, "eqImg");
-		} catch (IOException e) {
-			e.printStackTrace();
-			log.error(e.getMessage(),e);
-			return JsonWrapper.failureWrapper("装备图标上传失败");
-		}
-		Equipment eq = new Equipment();
-		eq.setImgurl(path.get(0));
-		eq.setDefense(request.getParameter("defense"));
-		eq.setEqName(request.getParameter("eqName"));
-		eq.setEqRare(Integer.parseInt(request.getParameter("eqRare")));
-		eq.setResistance(request.getParameter("resistance"));
-		eq.setResistanceType(Integer.parseInt(request.getParameter("resistanceType")));
-		try {
-			service.insert(eq);
+			String imgurl = equipment.getImgurl();
+			BASE64Decoder decoder = new BASE64Decoder();
+			// 解密
+			byte[] b = decoder.decodeBuffer(imgurl);
+			for (int i = 0; i < b.length; ++i) {
+				if (b[i] < 0) {
+					b[i] += 256;
+				}
+			}
+			File file = new File("D:\\SAMUpload\\"+equipment.getEqName()+".gif");
+			imgurl = file.getPath();
+			OutputStream out = new FileOutputStream(imgurl);
+			out.write(b);
+			out.flush();
+			out.close();
+			equipment.setImgurl(imgurl);
+			service.insert(equipment);
 			return JsonWrapper.successWrapper("装备保存成功");
 		} catch (Exception e1) {
 			e1.printStackTrace();

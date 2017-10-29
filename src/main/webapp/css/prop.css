@@ -8,7 +8,6 @@ body {
 
 .center {
 	height: 100%;
-	min-height:425px;
 	margin: 20px 20px 20px 250px;
 	background: #fff;
 	padding: 0 20px 20px;
@@ -29,9 +28,6 @@ body {
 	/* border-bottom:2px solid #54c06e; */
 	text-align: center;
 	float: left;
-}
-.equip-list{
-	border-bottom:2px solid #54c06e;
 }
 
 .left {
@@ -88,8 +84,10 @@ body {
 	height: 36px;
 	margin: 0 10px;
 }
-.center-table{
+.eq-div{
 	margin-top: 10px;
+}
+.center-table{
 	height: 520px;
 	overflow: auto;
 }
@@ -153,4 +151,31 @@ body {
 }
 .ul-bg{
 	background-color:rgb(105, 144, 173);
+}
+.eq-add{
+	display: none;
+}
+.eq-add .input-group{
+	margin-bottom: 15px;
+}
+.upload {
+    width: 90px;
+    height: 30px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    position: absolute;
+    left: 0;
+    z-index: 22;
+}
+#up-show{
+	border-radius:5px;
+	width: 240px;
+	height:200px;
+	background-color: rgba(46,52,80,1);
+}
+#up-show .col-md-6{
+	padding:15px 0 !important;
+}
+#up-show .eqImg-line{
+	margin:5px 0; 
 }

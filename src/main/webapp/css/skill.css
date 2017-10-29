@@ -1,3 +1,6 @@
-.skill-line{
+.line{
 	border-bottom:2px solid #54c06e;
+}
+.skill{
+	display: none;
 }
