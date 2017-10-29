@@ -26,16 +26,6 @@
 		<property name="password" value="${password}"></property> 
 		<property name="driverClassName" value="${drivername}"></property>
 		<property name="url" value="${url}"></property>
-		<!--maxActive: 最大连接数量-->    
-        <property name="maxActive" value="150"/>  
-        <!--minIdle: 最小空闲连接-->    
-        <property name="minIdle" value="5"/>  
-        <!--maxIdle: 最大空闲连接-->    
-        <property name="maxIdle" value="20"/>  
-        <!--initialSize: 初始化连接-->    
-        <property name="initialSize" value="30"/>  
-		<!--maxWait: 最大建立连接等待时间。如果超过此时间将接到异常。设为-1表示无限制。-->  
-        <property name="maxWait" value="6000"/> 
 	</bean>
 	<!-- 配置SqlSessionFactory -->
 	<bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean">
