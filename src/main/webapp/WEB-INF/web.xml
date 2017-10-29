@@ -32,6 +32,7 @@
   	<url-pattern>*.svg</url-pattern>
   	<url-pattern>*.ttf</url-pattern>
   	<url-pattern>*.png</url-pattern>
+  	<url-pattern>*.map</url-pattern>
   </servlet-mapping>
   
 </web-app>
