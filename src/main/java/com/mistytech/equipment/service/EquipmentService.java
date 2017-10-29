@@ -27,7 +27,7 @@ public class EquipmentService implements BaseService<Equipment> {
 	}
 
 	public void update(Equipment entity) throws Exception {
-		dao.insertSelective(entity);
+		dao.updateByPrimaryKeySelective(entity);
 	}
 
 	public void removeById(Integer id) throws Exception{
