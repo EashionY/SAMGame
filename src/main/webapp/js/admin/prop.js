@@ -89,10 +89,11 @@ function pageQuery(page,count){
 						eqStatus = "禁用";
 						msg = "启用";
 					}
+					console.log(imgurl)
 					html += "<tr>"+
 								"<td data-id='"+id+"'>"+((i+1)+(page-1)*count)+"</td>"+
 								"<td>"+
-									"<img class='equip-img' src='"+basePath+imgurl+"'>"+
+									"<img class='equip-img' src='"+"../../../"+imgurl+"'>"+
 								"</td>"+
 								"<td>"+eqName+"</td>"+
 								"<td>基础值：+"+defense+"；"+resType+"：+"+res+"</td>"+
@@ -344,6 +345,7 @@ function saveEquipment(){
 		data:data,
 		success:function(json){
 			layer.alert(json.data);
+			history.go(0)
 		}
 	})
 }

@@ -16,7 +16,6 @@ import com.mistytech.equipment.dao.EquipmentMapper;
 
 import sun.misc.BASE64Decoder;
 
-@SuppressWarnings("restriction")
 @Service("equipmentService")
 public class EquipmentService implements BaseService<Equipment> {
 	@Resource
@@ -51,19 +50,29 @@ public class EquipmentService implements BaseService<Equipment> {
 				b[i] += 256;
 			}
 		}
-		String path = request.getSession().getServletContext().getRealPath(String.valueOf(File.separatorChar));
-		path += "UploadImg" + File.separatorChar;
-		File file = new File(path+System.currentTimeMillis()+".gif");
+		String os = System.getProperty("os.name");
+		String path;
+		if(os.toLowerCase().startsWith("win")){
+			path = "D:\\SAMUpload"+File.separatorChar;
+		}else {
+			path = "/usr/SAMUpload/";
+		}
+		String relPath = "UploadImg" + File.separatorChar;
+		path += relPath;
+		String imgName = equipment.getEqName()+".gif";
+		path += imgName;
+		imgurl = relPath + imgName;
+		File file = new File(path);
 		if(!file.exists()) {
 			file.getParentFile().mkdir();
 		    file.createNewFile();
 		}
-		path = file.getPath();
 		OutputStream out = new FileOutputStream(path);
 		out.write(b);
 		out.flush();
 		out.close();
-		equipment.setImgurl(path);
+		imgurl = "img"+File.separatorChar+imgurl;
+		equipment.setImgurl(imgurl);
 		dao.insertSelective(equipment);
 	}
 
