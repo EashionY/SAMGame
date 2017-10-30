@@ -25,7 +25,6 @@ function getEquipmentAll(){
 			if(json.success){
 				totalPages = Math.ceil(json.data.length/10);
 				initPage(totalPages);
-				console.log(json.data)
 			}
 		}
 	})
@@ -72,6 +71,7 @@ function pageQuery(page,count){
 			if(json.success){
 				var html = "";
 				for(var i=0;i<json.data.length;i++){
+					var id = json.data[i].id;
 					var eqName = json.data[i].eqName;// 防具名称
 					var defense = json.data[i].defense;// 基础防御
 					var res = json.data[i].resistance;// 元素抗性
@@ -80,6 +80,7 @@ function pageQuery(page,count){
 					var eqRare = json.data[i].eqRare;// 稀有度
 					var eqStatus = json.data[i].eqStatus;// 状态
 					// eqStatus = eqStatus==1?"可用":"禁用";
+					var imgurl = json.data[i].imgurl;
 					var msg;
 					if(eqStatus==1){
 						eqStatus = "可用";
@@ -89,9 +90,9 @@ function pageQuery(page,count){
 						msg = "启用";
 					}
 					html += "<tr>"+
-								"<td data-id='1'>"+((i+1)+(page-1)*count)+"</td>"+
+								"<td data-id='"+id+"'>"+((i+1)+(page-1)*count)+"</td>"+
 								"<td>"+
-									"<img class='equip-img' src='img/equip/equip-001.png'>"+
+									"<img class='equip-img' src='"+basePath+imgurl+"'>"+
 								"</td>"+
 								"<td>"+eqName+"</td>"+
 								"<td>基础值：+"+defense+"；"+resType+"：+"+res+"</td>"+
@@ -122,6 +123,7 @@ function removeEq(btn){
 		success:function(json){
 			if(json.success){
 				$(btn).parent().parent().remove();
+				layer.alert("删除成功")
 			}else{
 				layer.alert(json.data)
 			}
@@ -203,16 +205,17 @@ function equipManage(){
 	$(".arms").hide()
 }
 /** *******************装备添加********************************* */
-// 获取属性抗性
+//写入属性抗性
 function writeRes(){
 	$(".eq-res .dropdown-menu").find("li").on("click",function(){
 		var rval = $(this).find("a").text();
 		var res = $(this).find("a").data("res");
 		$("#resistance").text(rval).data("res",res);
-		$("#up-show .baseRes").text(rval+"：");
+		$("#res-val").data("res",res);
+		$("#up-show .baseRes .baseRes-msg").text(rval+"：");
 	});
 }
-// 获取稀有度
+//写入稀有度
 function writeRare(){
 	$(".eq-rare .dropdown-menu").find("li").on("click",function(){
 		var rval = $(this).find("a").text();
@@ -318,6 +321,7 @@ function saveEquipment(){
 		layer.alert("元素抗性不能为0");
 		return;
 	};
+	var resistanceType = $("#res-val").data("res");
 	resistance = parseInt(resistance);
 	var eqRare = $("#eqRare").data("rare");// 稀有度
 	var eqBImg = $("#eqBImg").attr("src");// 稀有度
@@ -328,6 +332,7 @@ function saveEquipment(){
 			eqName:eqName,
 			defense:defense,
 			resistance:resistance,
+			resistanceType:resistanceType,
 			eqRare:eqRare,
 			imgurl:eqBImg
 		}
@@ -338,8 +343,7 @@ function saveEquipment(){
 		dataType:"json",
 		data:data,
 		success:function(json){
-			console.log(json)
+			layer.alert(json.data);
 		}
 	})
 }
-

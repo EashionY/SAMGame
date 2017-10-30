@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import com.mistytech.util.JsonWrapper;
 
 import sun.misc.BASE64Decoder;
 
+@SuppressWarnings("restriction")
 @Controller
 @RequestMapping("/equipment")
 public class EquipmentController extends BaseController{
@@ -27,7 +29,7 @@ public class EquipmentController extends BaseController{
 	private EquipmentService service;
 	
 	/**
-	 * ²éÑ¯ËùÓĞ×°±¸
+	 * æŸ¥è¯¢æ‰€æœ‰è£…å¤‡
 	 * @return
 	 */
 	@RequestMapping("/findAll")
@@ -37,7 +39,7 @@ public class EquipmentController extends BaseController{
 		return JsonWrapper.successWrapper(eqs);
 	}
 	/**
-	 * ·ÖÒ³²éÑ¯
+	 * åˆ†é¡µæŸ¥è¯¢
 	 * @param page
 	 * @param count
 	 * @return
@@ -49,42 +51,26 @@ public class EquipmentController extends BaseController{
 		return  JsonWrapper.successWrapper(eqs);
 	}
 	/**
-	 * ±£´æ×°±¸
-	 * @param request ²ÎÊı£ºeqImg,defense,eqName,eqRare,resistance,resistanceType
+	 * ä¿å­˜è£…å¤‡
+	 * @param request å‚æ•°ï¼šeqImg,defense,eqName,eqRare,resistance,resistanceType
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping("/saveEquipment")
 	@ResponseBody
-	public HashMap<String,Object> saveEquipment(Equipment equipment){
+	public HashMap<String,Object> saveEquipment(HttpServletRequest request,Equipment equipment){
 		try {
-			String imgurl = equipment.getImgurl();
-			BASE64Decoder decoder = new BASE64Decoder();
-			// ½âÃÜ
-			byte[] b = decoder.decodeBuffer(imgurl);
-			for (int i = 0; i < b.length; ++i) {
-				if (b[i] < 0) {
-					b[i] += 256;
-				}
-			}
-			File file = new File("D:\\SAMUpload\\"+equipment.getEqName()+".gif");
-			imgurl = file.getPath();
-			OutputStream out = new FileOutputStream(imgurl);
-			out.write(b);
-			out.flush();
-			out.close();
-			equipment.setImgurl(imgurl);
-			service.insert(equipment);
-			return JsonWrapper.successWrapper("×°±¸±£´æ³É¹¦");
-		} catch (Exception e1) {
-			e1.printStackTrace();
-			log.error(e1.getMessage(),e1);
-			return JsonWrapper.failureWrapper("ÍøÂçÒì³£");
+			service.insert(request,equipment);
+			return JsonWrapper.successWrapper("è£…å¤‡ä¿å­˜æˆåŠŸ");
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error(e.getMessage(),e);
+			return JsonWrapper.failureWrapper("ç½‘ç»œå¼‚å¸¸");
 		}
 	}
 	
 	/**
-	 * ĞŞ¸Ä×°±¸
+	 * ä¿®æ”¹è£…å¤‡
 	 * @param eq
 	 * @return
 	 */
@@ -93,15 +79,15 @@ public class EquipmentController extends BaseController{
 	public HashMap<String,Object> updateEquipment(Equipment eq){
 		try {
 			service.update(eq);
-			return JsonWrapper.successWrapper("×°±¸ĞŞ¸Ä³É¹¦");
+			return JsonWrapper.successWrapper("è£…å¤‡ä¿®æ”¹æˆåŠŸ");
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error(e.getMessage(),e);
-			return JsonWrapper.failureWrapper("ÍøÂçÒì³£");
+			return JsonWrapper.failureWrapper("ç½‘ç»œå¼‚å¸¸");
 		}
 	}
 	/**
-	 * É¾³ı×°±¸
+	 * åˆ é™¤è£…å¤‡
 	 * @param id
 	 * @return
 	 */
@@ -110,11 +96,11 @@ public class EquipmentController extends BaseController{
 	public HashMap<String,Object> deleteEquipment(Integer id){
 		try {
 			service.removeById(id);
-			return JsonWrapper.successWrapper("×°±¸ĞŞ¸Ä³É¹¦");
+			return JsonWrapper.successWrapper("è£…å¤‡åˆ é™¤æˆåŠŸ");
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error(e.getMessage(),e);
-			return JsonWrapper.failureWrapper("ÍøÂçÒì³£");
+			return JsonWrapper.failureWrapper("ç½‘ç»œå¼‚å¸¸");
 		}
 	}
 }
