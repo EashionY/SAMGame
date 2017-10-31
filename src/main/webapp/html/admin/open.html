@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>练习</title>
+<style type="text/css">
+.canvas {
+	width: 400px;
+	float:left;
+	border: 1px solid #ccc;
+}
+</style>
+<script type="text/javascript">
+	window.onload = function(){
+		paintPanel();
+		skelet();
+	}
+	//画板
+	function paintPanel(){
+		var canvas = document.getElementById('paint');
+		var cxt = canvas.getContext('2d');
+		canvas.onmousedown = function(ev){
+		    var x = ev.clientX - canvas.offsetLeft;//获取鼠标当前x位置
+		    var y = ev.clientY - canvas.offsetTop;//获取鼠标当前y位置
+		    cxt.beginPath();
+		    cxt.moveTo(x, y);
+		    document.onmousemove = function(ev){
+		        var x = ev.clientX - canvas.offsetLeft;
+		        var y = ev.clientY - canvas.offsetTop;
+		        cxt.lineTo(x, y);
+		        cxt.stroke();//绘制一条路径
+		    };
+		};
+		document.onmouseup = function(){
+	    	cxt.closePath();
+	    	document.onmousemove = null;
+		};
+	}
+	//烟花特效
+	function skelet(){
+		var canvas = document.getElementById("skelet");
+		var cxt = canvas.getContext("2d");
+		var timer;
+		var iStop = false;
+		var fires = [];
+		function draw(){
+            var _fires = [];
+            for(var i=0; i<fires.length; i++){
+                cxt.save();//保存当前状态
+                cxt.translate(fires[i].x, fires[i].y);//为画布的变换矩阵添加水平的和垂直的偏移
+                for(var j=0; j<12; j++){
+                    cxt.save();
+                    cxt.beginPath();
+                    cxt.strokeStyle = 'rgba('+fires[i].color+', '+(fires[i].alpha--)/1000+')';
+                    cxt.rotate(30*j*Math.PI/180+fires[i].offset);//旋转角度
+                    cxt.translate(fires[i].radius++/10, 0);
+                    cxt.rotate(45*Math.PI/180);
+                    cxt.moveTo(0, 0);
+                    cxt.lineTo(10, 0);
+                    cxt.stroke();
+                    cxt.closePath();
+                    cxt.restore();
+                }
+                cxt.restore();//绘图状态置为保存值。
+ 
+                if(fires[i].alpha > 0){
+                    _fires.push(fires[i])
+                }
+            }
+            fires = _fires;
+        }
+ 
+        function drawTip() {
+            cxt.save();
+            cxt.font="20px Verdana";
+            cxt.fillStyle = 'skyblue';
+            cxt.fillText('请单击页面！', 230, 290);
+            cxt.restore();
+        }
+ 
+        function erase(){
+            cxt.clearRect(0, 0, canvas.width, canvas.height);
+        }
+ 
+        canvas.onmousedown = function(e){
+            var ev = e || window.event;
+ 
+            var x = e.clientX - canvas.offsetLeft;
+            var y = e.clientY - canvas.offsetTop;
+ 
+            var r = Math.round(Math.random()*255);
+            var g = Math.round(Math.random()*255);
+            var b = Math.round(Math.random()*255);
+ 
+            var offset = Math.round(Math.random()*45);
+ 
+            fires.push({'radius':0,'alpha':1000,'x':x,'y':y,'color':r+','+g+','+b, 'offset':offset});
+        };
+ 
+        window.requestAnimationFrame =
+                window.requestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.msRequestAnimationFrame;
+ 
+        window.cancelRequestAnimationFrame =
+                window.cancelRequestAnimationFrame ||
+                window.mozCancelRequestAnimationFrame ||
+                window.webkitCancelRequestAnimationFrame ||
+                window.msCancelRequestAnimationFrame;
+ 
+        function animate() {
+            erase();
+            draw();
+            drawTip();
+            if(iStop){
+                cancelRequestAnimationFrame(timer);
+            }else{
+                timer = requestAnimationFrame(animate);
+            }
+        }
+        animate();
+	}
+</script>
+</head>
+<body>
+	<div class="canvas">
+		画板
+		<canvas width="400px" height="400px" id="paint"></canvas>
+	</div>
+	<div class="canvas">
+		烟花
+		<canvas width="400" height="400" id="skelet"></canvas>
+	</div>
+</body>
+</html>
